@@ -107,6 +107,7 @@ type Window struct {
 		off  image.Point
 		deco op.CallOp
 	}
+	transparent bool
 }
 
 type eventSummary struct {
@@ -203,12 +204,14 @@ func (w *Window) validateAndProcess(size image.Point, sync bool, frame *op.Ops, 
 }
 
 func (w *Window) frame(frame *op.Ops, viewport image.Point) error {
-	if runtime.GOOS == "js" {
-		// Use transparent black when Gio is embedded, to allow mixing of Gio and
-		// foreign content below.
+	if w.transparent {
 		w.gpu.Clear(color.NRGBA{A: 0x00, R: 0x00, G: 0x00, B: 0x00})
 	} else {
-		w.gpu.Clear(color.NRGBA{A: 0xff, R: 0xff, G: 0xff, B: 0xff})
+		if runtime.GOOS == "js" {
+			w.gpu.Clear(color.NRGBA{A: 0x00, R: 0x00, G: 0x00, B: 0x00})
+		} else {
+			w.gpu.Clear(color.NRGBA{A: 0xff, R: 0xff, G: 0xff, B: 0xff})
+		}
 	}
 	target, err := w.ctx.RenderTarget()
 	if err != nil {
@@ -755,6 +758,7 @@ func (w *Window) init() {
 	var cnf Config
 	cnf.apply(unit.Metric{}, options)
 
+	w.transparent = cnf.Transparent
 	w.nocontext = cnf.CustomRenderer
 	w.decorations.Theme = theme
 	w.decorations.Decorations = deco
@@ -962,6 +966,12 @@ func CustomRenderer(custom bool) Option {
 func Decorated(enabled bool) Option {
 	return func(_ unit.Metric, cnf *Config) {
 		cnf.Decorated = enabled
+	}
+}
+
+func Transparent(enabled bool) Option {
+	return func(_ unit.Metric, cnf *Config) {
+		cnf.Transparent = enabled
 	}
 }
 

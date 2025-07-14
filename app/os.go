@@ -45,6 +45,8 @@ type Config struct {
 	CustomRenderer bool
 	// Decorated reports whether window decorations are provided automatically.
 	Decorated bool
+	// Transparent makes the window transparent on supported systems.
+	Transparent bool
 	// Focused reports whether has the keyboard focus.
 	Focused bool
 	// decoHeight is the height of the fallback decoration for platforms such

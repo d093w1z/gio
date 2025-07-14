@@ -83,6 +83,8 @@ type x11Window struct {
 		atom C.Atom
 		// "GTK_TEXT_BUFFER_CONTENTS"
 		gtk_text_buffer_contents C.Atom
+		// "_MOTIF_WM_HINTS"
+		motifWmHints C.Atom
 		// "_NET_WM_NAME"
 		wmName C.Atom
 		// "_NET_WM_STATE"
@@ -236,6 +238,9 @@ func (w *x11Window) Configure(options []Option) {
 	}
 	if cnf.Decorated != prev.Decorated {
 		w.config.Decorated = cnf.Decorated
+	}
+	if cnf.Transparent != prev.Transparent {
+		w.config.Transparent = cnf.Transparent
 	}
 	w.ProcessEvent(ConfigEvent{Config: w.config})
 }
@@ -802,19 +807,35 @@ func newX11Window(gioWin *callbacks, options []Option) error {
 	var cnf Config
 	cnf.apply(cfg, options)
 
+	screen := C.XDefaultScreen(dpy)
+
 	swa := C.XSetWindowAttributes{
 		event_mask: C.ExposureMask | C.FocusChangeMask | // update
 			C.KeyPressMask | C.KeyReleaseMask | // keyboard
 			C.ButtonPressMask | C.ButtonReleaseMask | // mouse clicks
 			C.PointerMotionMask | // mouse movement
 			C.StructureNotifyMask, // resize
-		background_pixmap: C.None,
+		background_pixmap: 0,
+		border_pixel:      0,
 		override_redirect: C.False,
 	}
-	win := C.XCreateWindow(dpy, C.XDefaultRootWindow(dpy),
+
+	var visual *C.Visual
+	depth := C.int(C.CopyFromParent)
+	valueMask := C.ulong(C.CWEventMask | C.CWBackPixmap | C.CWBorderPixel | C.CWOverrideRedirect)
+	if cnf.Transparent {
+		var vInfo C.XVisualInfo
+		C.XMatchVisualInfo(dpy, screen, 32, C.TrueColor, &vInfo)
+		visual = vInfo.visual
+		depth = C.int(vInfo.depth)
+		valueMask = valueMask | C.CWColormap
+		swa.colormap = C.XCreateColormap(dpy, C.XRootWindow(dpy, screen), visual, C.AllocNone)
+	}
+
+	win := C.XCreateWindow(dpy, C.XRootWindow(dpy, screen),
 		0, 0, C.uint(cnf.Size.X), C.uint(cnf.Size.Y),
-		0, C.CopyFromParent, C.InputOutput, nil,
-		C.CWEventMask|C.CWBackPixmap|C.CWOverrideRedirect, &swa)
+		0, depth, C.InputOutput, visual,
+		valueMask, &swa)
 
 	w := &x11Window{
 		w: gioWin, x: dpy, xw: win,
@@ -853,6 +874,7 @@ func newX11Window(gioWin *callbacks, options []Option) error {
 	w.atoms.clipboardContent = w.atom("CLIPBOARD_CONTENT", false)
 	w.atoms.atom = w.atom("ATOM", false)
 	w.atoms.targets = w.atom("TARGETS", false)
+	w.atoms.motifWmHints = w.atom("_MOTIF_WM_HINTS", false)
 	w.atoms.wmName = w.atom("_NET_WM_NAME", false)
 	w.atoms.wmState = w.atom("_NET_WM_STATE", false)
 	w.atoms.wmStateFullscreen = w.atom("_NET_WM_STATE_FULLSCREEN", false)
@@ -862,6 +884,10 @@ func newX11Window(gioWin *callbacks, options []Option) error {
 
 	// extensions
 	C.XSetWMProtocols(dpy, win, &w.atoms.evDelWindow, 1)
+
+	if !cnf.Decorated {
+		w.updateDecorations(false)
+	}
 
 	// make the window visible on the screen
 	C.XMapWindow(dpy, win)
@@ -925,4 +951,22 @@ func (w *x11Window) updateXkbKeymap() error {
 	}
 	w.xkb.SetKeymap(unsafe.Pointer(keymap), unsafe.Pointer(state))
 	return nil
+}
+
+func (w *x11Window) updateDecorations(enabled bool) {
+	type motifHints struct {
+		flags       C.ulong
+		functions   C.ulong
+		decorations C.ulong
+		inputMode   C.long
+		status      C.ulong
+	}
+	wmHints := motifHints{flags: 2}
+	if enabled {
+		wmHints.decorations = 1
+	} else {
+		wmHints.decorations = 0
+	}
+	C.XChangeProperty(w.x, w.xw, w.atoms.motifWmHints, w.atoms.motifWmHints, 32,
+		C.PropModeReplace, (*C.uchar)(unsafe.Pointer(&wmHints)), 5)
 }
