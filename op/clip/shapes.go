@@ -6,10 +6,10 @@ import (
 	"image"
 	"math"
 
-	"gioui.org/f32"
-	f32internal "gioui.org/internal/f32"
-	"gioui.org/internal/ops"
-	"gioui.org/op"
+	"github.com/d093w1z/gio/f32"
+	f32internal "github.com/d093w1z/gio/internal/f32"
+	"github.com/d093w1z/gio/internal/ops"
+	"github.com/d093w1z/gio/op"
 )
 
 // Rect represents the clip area of a pixel-aligned rectangle.

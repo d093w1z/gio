@@ -5,7 +5,7 @@
 package app
 
 import (
-	"gioui.org/internal/egl"
+	"github.com/d093w1z/gio/internal/egl"
 )
 
 type glContext struct {

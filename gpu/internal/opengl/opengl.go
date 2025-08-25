@@ -13,9 +13,9 @@ import (
 	"time"
 	"unsafe"
 
-	"gioui.org/gpu/internal/driver"
-	"gioui.org/internal/gl"
 	"gioui.org/shader"
+	"github.com/d093w1z/gio/gpu/internal/driver"
+	"github.com/d093w1z/gio/internal/gl"
 )
 
 // Backend implements driver.Device.

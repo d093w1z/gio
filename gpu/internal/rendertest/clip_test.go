@@ -10,10 +10,10 @@ import (
 
 	"golang.org/x/image/colornames"
 
-	"gioui.org/f32"
-	"gioui.org/op"
-	"gioui.org/op/clip"
-	"gioui.org/op/paint"
+	"github.com/d093w1z/gio/f32"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/op/clip"
+	"github.com/d093w1z/gio/op/paint"
 )
 
 func TestPaintRect(t *testing.T) {

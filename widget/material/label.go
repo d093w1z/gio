@@ -5,14 +5,14 @@ package material
 import (
 	"image/color"
 
-	"gioui.org/font"
-	"gioui.org/internal/f32color"
-	"gioui.org/layout"
-	"gioui.org/op"
-	"gioui.org/op/paint"
-	"gioui.org/text"
-	"gioui.org/unit"
-	"gioui.org/widget"
+	"github.com/d093w1z/gio/font"
+	"github.com/d093w1z/gio/internal/f32color"
+	"github.com/d093w1z/gio/layout"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/op/paint"
+	"github.com/d093w1z/gio/text"
+	"github.com/d093w1z/gio/unit"
+	"github.com/d093w1z/gio/widget"
 )
 
 // LabelStyle configures the presentation of text. If the State field is set, the

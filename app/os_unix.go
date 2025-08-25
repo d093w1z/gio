@@ -9,7 +9,7 @@ import (
 	"errors"
 	"unsafe"
 
-	"gioui.org/io/pointer"
+	"github.com/d093w1z/gio/io/pointer"
 )
 
 type X11ViewEvent struct {

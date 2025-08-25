@@ -20,14 +20,14 @@ import (
 	"golang.org/x/image/math/fixed"
 	"golang.org/x/text/unicode/bidi"
 
-	"gioui.org/f32"
-	giofont "gioui.org/font"
-	"gioui.org/font/opentype"
-	"gioui.org/internal/debug"
-	"gioui.org/io/system"
-	"gioui.org/op"
-	"gioui.org/op/clip"
-	"gioui.org/op/paint"
+	"github.com/d093w1z/gio/f32"
+	giofont "github.com/d093w1z/gio/font"
+	"github.com/d093w1z/gio/font/opentype"
+	"github.com/d093w1z/gio/internal/debug"
+	"github.com/d093w1z/gio/io/system"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/op/clip"
+	"github.com/d093w1z/gio/op/paint"
 )
 
 // document holds a collection of shaped lines and alignment information for

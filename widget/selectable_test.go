@@ -5,14 +5,14 @@ import (
 	"image"
 	"testing"
 
-	"gioui.org/font"
-	"gioui.org/font/gofont"
-	"gioui.org/io/input"
-	"gioui.org/io/key"
-	"gioui.org/layout"
-	"gioui.org/op"
-	"gioui.org/text"
-	"gioui.org/unit"
+	"github.com/d093w1z/gio/font"
+	"github.com/d093w1z/gio/font/gofont"
+	"github.com/d093w1z/gio/io/input"
+	"github.com/d093w1z/gio/io/key"
+	"github.com/d093w1z/gio/layout"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/text"
+	"github.com/d093w1z/gio/unit"
 )
 
 func TestSelectableZeroValue(t *testing.T) {

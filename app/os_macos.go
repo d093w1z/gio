@@ -16,16 +16,16 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"gioui.org/internal/f32"
-	"gioui.org/io/event"
-	"gioui.org/io/key"
-	"gioui.org/io/pointer"
-	"gioui.org/io/system"
-	"gioui.org/io/transfer"
-	"gioui.org/op"
-	"gioui.org/unit"
+	"github.com/d093w1z/gio/internal/f32"
+	"github.com/d093w1z/gio/io/event"
+	"github.com/d093w1z/gio/io/key"
+	"github.com/d093w1z/gio/io/pointer"
+	"github.com/d093w1z/gio/io/system"
+	"github.com/d093w1z/gio/io/transfer"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/unit"
 
-	_ "gioui.org/internal/cocoainit"
+	_ "github.com/d093w1z/gio/internal/cocoainit"
 )
 
 /*

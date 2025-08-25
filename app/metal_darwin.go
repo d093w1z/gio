@@ -8,7 +8,7 @@ package app
 import (
 	"errors"
 
-	"gioui.org/gpu"
+	"github.com/d093w1z/gio/gpu"
 )
 
 /*

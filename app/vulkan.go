@@ -10,8 +10,8 @@ import (
 	"errors"
 	"unsafe"
 
-	"gioui.org/gpu"
-	"gioui.org/internal/vk"
+	"github.com/d093w1z/gio/gpu"
+	"github.com/d093w1z/gio/internal/vk"
 )
 
 type vkContext struct {

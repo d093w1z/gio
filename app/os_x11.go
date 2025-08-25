@@ -38,18 +38,18 @@ import (
 	"time"
 	"unsafe"
 
-	"gioui.org/f32"
-	"gioui.org/io/event"
-	"gioui.org/io/key"
-	"gioui.org/io/pointer"
-	"gioui.org/io/system"
-	"gioui.org/io/transfer"
-	"gioui.org/op"
-	"gioui.org/unit"
+	"github.com/d093w1z/gio/f32"
+	"github.com/d093w1z/gio/io/event"
+	"github.com/d093w1z/gio/io/key"
+	"github.com/d093w1z/gio/io/pointer"
+	"github.com/d093w1z/gio/io/system"
+	"github.com/d093w1z/gio/io/transfer"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/unit"
 
 	syscall "golang.org/x/sys/unix"
 
-	"gioui.org/app/internal/xkb"
+	"github.com/d093w1z/gio/app/internal/xkb"
 )
 
 const (
@@ -124,7 +124,7 @@ var (
 )
 
 // X11 and Vulkan doesn't work reliably on NVIDIA systems.
-// See https://gioui.org/issue/347.
+// See https://github.com/d093w1z/gio/issue/347.
 const vulkanBuggy = true
 
 func (w *x11Window) NewContext() (context, error) {

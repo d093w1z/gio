@@ -12,11 +12,11 @@ import (
 	"runtime"
 	"testing"
 
-	"gioui.org/gpu/internal/driver"
-	"gioui.org/internal/byteslice"
-	"gioui.org/internal/f32color"
 	"gioui.org/shader"
 	"gioui.org/shader/gio"
+	"github.com/d093w1z/gio/gpu/internal/driver"
+	"github.com/d093w1z/gio/internal/byteslice"
+	"github.com/d093w1z/gio/internal/f32color"
 )
 
 var dumpImages = flag.Bool("saveimages", false, "save test images")

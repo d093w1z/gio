@@ -6,10 +6,10 @@ import (
 	"image"
 	"math"
 
-	"gioui.org/gesture"
-	"gioui.org/io/pointer"
-	"gioui.org/op"
-	"gioui.org/op/clip"
+	"github.com/d093w1z/gio/gesture"
+	"github.com/d093w1z/gio/io/pointer"
+	"github.com/d093w1z/gio/op"
+	"github.com/d093w1z/gio/op/clip"
 )
 
 type scrollChild struct {

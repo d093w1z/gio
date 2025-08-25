@@ -19,23 +19,23 @@ import (
 	"time"
 	"unsafe"
 
-	"gioui.org/gpu/internal/driver"
-	"gioui.org/internal/byteslice"
-	"gioui.org/internal/f32"
-	"gioui.org/internal/f32color"
-	"gioui.org/internal/ops"
-	"gioui.org/internal/scene"
-	"gioui.org/internal/stroke"
-	"gioui.org/layout"
-	"gioui.org/op"
 	"gioui.org/shader"
 	"gioui.org/shader/gio"
+	"github.com/d093w1z/gio/gpu/internal/driver"
+	"github.com/d093w1z/gio/internal/byteslice"
+	"github.com/d093w1z/gio/internal/f32"
+	"github.com/d093w1z/gio/internal/f32color"
+	"github.com/d093w1z/gio/internal/ops"
+	"github.com/d093w1z/gio/internal/scene"
+	"github.com/d093w1z/gio/internal/stroke"
+	"github.com/d093w1z/gio/layout"
+	"github.com/d093w1z/gio/op"
 
 	// Register backends.
-	_ "gioui.org/gpu/internal/d3d11"
-	_ "gioui.org/gpu/internal/metal"
-	_ "gioui.org/gpu/internal/opengl"
-	_ "gioui.org/gpu/internal/vulkan"
+	_ "github.com/d093w1z/gio/gpu/internal/d3d11"
+	_ "github.com/d093w1z/gio/gpu/internal/metal"
+	_ "github.com/d093w1z/gio/gpu/internal/opengl"
+	_ "github.com/d093w1z/gio/gpu/internal/vulkan"
 )
 
 type GPU interface {

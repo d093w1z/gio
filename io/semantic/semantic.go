@@ -10,8 +10,8 @@
 package semantic
 
 import (
-	"gioui.org/internal/ops"
-	"gioui.org/op"
+	"github.com/d093w1z/gio/internal/ops"
+	"github.com/d093w1z/gio/op"
 )
 
 // LabelOp provides the content of a textual component.
